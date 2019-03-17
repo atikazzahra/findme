@@ -72,9 +72,13 @@ body {
   left: 50%;
   transform: translate(-50%, -50%); }
 
-.introduction-name {
-  font-size: 30px; }
-
-.introduction-name, .introduction-location,
-.introduction a {
-  color: #81ffbf; }
+.introduction {
+  display: none;
+  margin-top: 12px;
+  background-color: #0000008f;
+  padding: 10px 15px 18px; }
+  .introduction-name {
+    font-size: 30px; }
+  .introduction-name, .introduction-location,
+  .introduction a {
+    color: #81ffbf; }
