@@ -1,0 +1,8 @@
+node_sass:
+  outputStyle: nested
+  precision: 5
+  sourceComments: false
+title: finding jupiter
+menu:
+  home: /
+  me: /
