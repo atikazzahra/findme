@@ -1,0 +1,80 @@
+body {
+  font-family: 'Roboto Mono', monospace;
+  margin: 0;
+  overflow: hidden; }
+
+.searchlight {
+  position: absolute;
+  z-index: 1;
+  height: 300px;
+  width: 300px;
+  border-width: 100vh 100vw;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.8);
+  top: -100vh;
+  left: -100vw;
+  cursor: none;
+  background: rgba(0, 0, 0, 0.8);
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  -ms-box-sizing: content-box;
+  box-sizing: content-box;
+  background: -moz-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.8) 60%, rgba(0, 0, 0, 0.8) 100%);
+  /* FF3.6+ */
+  background: -webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.8) 60%, rgba(0, 0, 0, 0.8) 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.8) 60%, rgba(0, 0, 0, 0.8) 100%);
+  /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.8) 60%, rgba(0, 0, 0, 0.8) 100%);
+  /* IE10+ */
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.8) 60%, rgba(0, 0, 0, 0.8) 100%);
+  /* W3C */
+  background-repeat: no-repeat; }
+
+.video-container {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+  .video-container > video, .video-container .searchscreen {
+    /* Make video to at least 100% wide and tall */
+    min-width: 100%;
+    min-height: 100%;
+    /* Setting width & height to auto prevents the browser from stretching or squishing the video */
+    width: auto;
+    height: auto;
+    /* Center the video */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+
+.searchscreen {
+  z-index: 3; }
+
+.text-welcome {
+  z-index: 2;
+  text-align: center;
+  color: white; }
+  .text-welcome .title {
+    font-size: 30px; }
+    .text-welcome .title a {
+      color: #ff6868; }
+  .text-welcome .subtitle {
+    font-size: 20px; }
+
+.u-pos--middle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
+.introduction-name {
+  font-size: 30px; }
+
+.introduction-name, .introduction-location,
+.introduction a {
+  color: #81ffbf; }
