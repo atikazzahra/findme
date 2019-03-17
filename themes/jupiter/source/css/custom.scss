@@ -1,6 +1,7 @@
 $shadow-color-1: rgba(0,0,0,0.8);
 $shadow-color-0: rgba(0,0,0,0);
 $attention-color: #81ffbf;
+$box-color: #0000008f;
 body {
   font-family: 'Roboto Mono', monospace;
   margin: 0;
@@ -84,6 +85,10 @@ body {
 }
 
 .introduction {
+  display: none;
+  margin-top: 12px;
+  background-color: $box-color;
+  padding: 10px 15px 18px;
   &-name {
     font-size: 30px;
   }

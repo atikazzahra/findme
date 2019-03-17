@@ -9,6 +9,7 @@ const SPOTLIGHT_CLS = '.searchlight'
 const SCREEN_CLS = '.searchscreen'
 const TITLE_CLS = '.title'
 const SUBTITLE_CLS = '.subtitle'
+const INTRO_CLS = '.introduction'
 
 function initGreetings() {
   const dialogue = greetings
@@ -72,6 +73,7 @@ async function initSearchEvents() {
 async function foundMe() {
   await sleep(1000)
   $(SUBTITLE_CLS).html('')
+  $(INTRO_CLS).css({'display': 'inline-block'})
   const introDialogue = introduction
   const introductionManager = new dialogueManager(introDialogue)
   introductionManager.start()

@@ -1,3 +1,4 @@
+const MinifyPlugin = require("babel-minify-webpack-plugin");
 module.exports = {
   entry: [
     'themes/jupiter/source/js/app.js',
@@ -9,10 +10,14 @@ module.exports = {
       exclude: /node_modules/,
       query: {
         presets: [
+          "minify",
           "@babel/preset-env",
           "@babel/preset-react",
         ]
       }
-    }]
-  }
+    }],
+  },
+  plugins: [
+    new MinifyPlugin()
+  ]
 };

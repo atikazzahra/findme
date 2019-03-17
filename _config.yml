@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: jupiter-findme
 subtitle:
 description:
 keywords:
@@ -13,8 +13,8 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://atikazzahra.github.io/jupiter-rants/
-root: /
+url: https://atikazzahra.github.io/findme/
+root: /findme/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
@@ -79,7 +79,7 @@ theme: jupiter
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/atikazzahra/jupiter-rants.git
+  repo: https://github.com/atikazzahra/findme.git
   branch: gh-pages
 
 webpack_config: 'themes/jupiter/webpack.config.js'
