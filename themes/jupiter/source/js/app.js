@@ -1,8 +1,9 @@
 import coordinate from './data/coordinate.json'
+import resolution from './data/resolution.json'
 import greetings from './data/greetings.json'
 import introduction from './data/introduction.json'
 import dialogueManager from './dialogueManager.js'
-import { clearAllTimeout, isInsideArea, sleep } from './helpers.js'
+import { clearAllTimeout, isInsideArea, sleep, getRelativePosition } from './helpers.js'
 
 const VIDEO_CLS = '.video'
 const SPOTLIGHT_CLS = '.searchlight'
@@ -17,30 +18,52 @@ function initGreetings() {
   manager.start()
 }
 
+function updateScreenSize() {
+  $(SCREEN_CLS).height($(VIDEO_CLS).height())
+  $(SCREEN_CLS).width($(VIDEO_CLS).width())
+  // updateSpotlightSize()
+}
+
+function updateSpotlightSize() {
+  const ratio = Math.round($(VIDEO_CLS).width()/resolution.x * 300)
+  $(SPOTLIGHT_CLS).css({
+    'height': ratio,
+    'width': ratio
+  })
+}
+
 function initEvents() {
   if ($(VIDEO_CLS)[0].readyState === 4 ) {
-    $(SCREEN_CLS).height($('video').height())
-    $(SCREEN_CLS).width($('video').width())
+    updateScreenSize()
     initSearchEvents()
   } else {
     $(VIDEO_CLS).on('loadeddata', (e) => {
-      $(SCREEN_CLS).height($('video').height())
-      $(SCREEN_CLS).width($('video').width())
+      updateScreenSize()
       initSearchEvents()
     })
   }
 }
 
 async function initSearchEvents() {
+  $(window).resize(() => {
+    updateScreenSize()
+  })
+
   $(SCREEN_CLS).on('mousemove', (e) => {
+    const diff = $(SPOTLIGHT_CLS).width()/2
+    console.log(diff)
     $(SPOTLIGHT_CLS).css({
-      'margin-left': e.pageX - 150,
-      'margin-top': e.pageY - 150
+      'margin-left': e.pageX - diff,
+      'margin-top': e.pageY - diff
     })
   })
 
   $(SCREEN_CLS).on('click', (e) => {
-    const eventPosition = { x: e.offsetX, y: e.offsetY }
+    const VIDEO_RES = {
+      x: $(VIDEO_CLS).width(),
+      y: $(VIDEO_CLS).height()
+    }
+    const eventPosition = getRelativePosition(resolution, VIDEO_RES, e)
     const diff = 50
     const foundKey = Object.keys(coordinate).find((key) => { 
       const inside = isInsideArea(eventPosition, coordinate[key], diff)
