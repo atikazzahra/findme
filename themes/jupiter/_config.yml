@@ -2,6 +2,9 @@ node_sass:
   outputStyle: nested
   precision: 5
   sourceComments: false
-title: finding jupiter
+title: cattotopia
+favicon: favicon.ico
 menu:
   home: /
+  catbus: /catbus/
+  apartement: /apartement/

@@ -2,10 +2,22 @@ $shadow-color-1: rgba(0,0,0,0.8);
 $shadow-color-0: rgba(0,0,0,0);
 $attention-color: #81ffbf;
 $box-color: #0000008f;
+$bg-color: #171b29;
+
 body {
+  background: $bg-color;
   font-family: 'Roboto Mono', monospace;
   margin: 0;
   overflow: hidden;
+}
+
+.text-index {
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    text-shadow: 2px 2px #FF9800;
+  }
 }
 
 .searchlight {
@@ -42,15 +54,10 @@ body {
   height: 100%; 
   overflow: hidden;
   > video, .searchscreen {
-    /* Make video to at least 100% wide and tall */
     min-width: 100%; 
     min-height: 100%; 
-    
-    /* Setting width & height to auto prevents the browser from stretching or squishing the video */
     width: auto;
     height: auto;
-    
-    /* Center the video */
     position: absolute;
     top: 50%;
     left: 50%;
@@ -63,6 +70,8 @@ body {
 }
 
 .text-welcome {
+  pointer-events: none;
+  text-shadow: -2px 3px 2px #0a1961;
   z-index: 2;
   text-align: center;
   color: white;
@@ -84,18 +93,19 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.introduction {
+.navigation {
   display: none;
-  margin-top: 12px;
-  background-color: $box-color;
-  padding: 10px 15px 18px;
-  &-name {
-    font-size: 30px;
-  }
-
-  &-name,
-  &-location,
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 20px;
+  margin: 20px 30px;
+  text-decoration: none;
   a {
-    color: $attention-color;
+        text-decoration: none;
+    color: white;
+  }
+  a:hover {
+    text-shadow: 2px 2px #FF9800;
   }
 }

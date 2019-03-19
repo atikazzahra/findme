@@ -1,7 +1,8 @@
 const MinifyPlugin = require("babel-minify-webpack-plugin");
 module.exports = {
   entry: [
-    'themes/jupiter/source/js/app.js',
+    'themes/jupiter/source/js/app-catbus.js',
+    'themes/jupiter/source/js/app-apartement.js'
   ],
   module: {
     loaders: [{

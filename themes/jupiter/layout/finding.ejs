@@ -1,0 +1,25 @@
+<div class="text-autoplay text-welcome u-pos--middle">
+  <div class="title"></div>
+  <div class="subtitle"></div>
+</div>
+<div class="video-container">
+  <div class="searchscreen"></div>
+  <div class="searchlight"></div>
+  <video
+    class="video"
+    autoplay 
+    muted 
+    loop>
+    <source
+      id="vid"
+      src="<%- config.root %><%=page.video%>" 
+      type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+<div class="navigation">
+  <% if (page.next) { %>
+    <a class="nav" href="<%- config.root %><%=page.next%>">→</a>
+  <% } %>
+</div>
+<script src="<%- config.root %><%=page.script%>"></script>
