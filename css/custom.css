@@ -47,13 +47,10 @@ body {
   height: 100%;
   overflow: hidden; }
   .video-container > video, .video-container .searchscreen {
-    /* Make video to at least 100% wide and tall */
     min-width: 100%;
     min-height: 100%;
-    /* Setting width & height to auto prevents the browser from stretching or squishing the video */
     width: auto;
     height: auto;
-    /* Center the video */
     position: absolute;
     top: 50%;
     left: 50%;
@@ -63,6 +60,7 @@ body {
   z-index: 3; }
 
 .text-welcome {
+  pointer-events: none;
   text-shadow: -2px 3px 2px #0a1961;
   z-index: 2;
   text-align: center;
