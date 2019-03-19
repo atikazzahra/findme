@@ -1,8 +1,15 @@
 @import url(bootstrap-grid.css);
 body {
+  background: #171b29;
   font-family: 'Roboto Mono', monospace;
   margin: 0;
   overflow: hidden; }
+
+.text-index a {
+  text-decoration: none; }
+
+.text-index a:hover {
+  text-shadow: 2px 2px #FF9800; }
 
 .searchlight {
   position: absolute;
@@ -57,6 +64,7 @@ body {
   z-index: 3; }
 
 .text-welcome {
+  text-shadow: -2px 3px 2px #0a1961;
   z-index: 2;
   text-align: center;
   color: white; }
@@ -72,14 +80,3 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); }
-
-.introduction {
-  display: none;
-  margin-top: 12px;
-  background-color: #0000008f;
-  padding: 10px 15px 18px; }
-  .introduction-name {
-    font-size: 30px; }
-  .introduction-name, .introduction-location,
-  .introduction a {
-    color: #81ffbf; }
