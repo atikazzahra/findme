@@ -7,6 +7,7 @@ const SPOTLIGHT_CLS = '.searchlight'
 const SCREEN_CLS = '.searchscreen'
 const TITLE_CLS = '.title'
 const SUBTITLE_CLS = '.subtitle'
+const NAV_CLS = '.navigation'
 
 export default class main {
   constructor(greetings, coordinate) {
@@ -78,6 +79,7 @@ export default class main {
         $(SPOTLIGHT_CLS).fadeOut(function() {
           $(SPOTLIGHT_CLS).remove()
           $(SCREEN_CLS).off('click')
+          $(NAV_CLS).css({display: 'inline-block'})
         })
       }
     })

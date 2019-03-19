@@ -78,3 +78,17 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); }
+
+.navigation {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 20px;
+  margin: 20px 30px;
+  text-decoration: none; }
+  .navigation a {
+    text-decoration: none;
+    color: white; }
+  .navigation a:hover {
+    text-shadow: 2px 2px #FF9800; }
