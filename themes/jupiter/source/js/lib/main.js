@@ -17,6 +17,7 @@ export default class main {
   run() {
     this.initGreetings()
     this.initEvents()
+    this.initGestureEventListener()
   }
   initGreetings() {
     const manager = new dialogueManager(this.greetings)
@@ -86,5 +87,35 @@ export default class main {
   }
   async foundMe() {
     await sleep(1000)
+  }
+  initGestureEventListener() {
+    const mc = new Hammer($(SCREEN_CLS)[0])
+    mc.get('pan').set({
+      threshold: 0,
+      direction: Hammer.DIRECTION_ALL });
+    mc.on('pan', (ev) => {
+      const top = $(VIDEO_CLS).offset().top + ev.deltaY
+      const left = $(VIDEO_CLS).offset().left + ev.deltaX
+      const lastHeight = window.innerHeight - top
+      const isHeightValid = lastHeight <= $(VIDEO_CLS).height() && top <= 0
+      const lastWidth = window.innerWidth - left
+      const isWidthValid = lastWidth <= $(VIDEO_CLS).width() && left <= 0
+      if (isHeightValid) {
+        const heightStyle = {
+          'transform': 'none',
+          'top': `${top}px`
+        }
+        $(VIDEO_CLS).css(heightStyle)
+        $(SCREEN_CLS).css(heightStyle)
+      } 
+      if (isWidthValid) {
+        const widthStyle = { 
+          'transform': 'none',
+          'left': `${left}px`
+        }
+        $(VIDEO_CLS).css(widthStyle)
+        $(SCREEN_CLS).css(widthStyle)
+      }
+    });
   }
 }
