@@ -8,7 +8,9 @@ const SCREEN_CLS = '.searchscreen'
 const TITLE_CLS = '.title'
 const SUBTITLE_CLS = '.subtitle'
 const NAV_CLS = '.navigation'
-
+let lastPosX = 0;
+let lastPosY = 0;
+let isDragging = false;
 export default class main {
   constructor(greetings, coordinate) {
     this.greetings = greetings
@@ -93,29 +95,38 @@ export default class main {
     mc.get('pan').set({
       threshold: 0,
       direction: Hammer.DIRECTION_ALL });
-    mc.on('pan', (ev) => {
-      const top = $(VIDEO_CLS).offset().top + ev.deltaY
-      const left = $(VIDEO_CLS).offset().left + ev.deltaX
-      const lastHeight = window.innerHeight - top
-      const isHeightValid = lastHeight <= $(VIDEO_CLS).height() && top <= 0
-      const lastWidth = window.innerWidth - left
-      const isWidthValid = lastWidth <= $(VIDEO_CLS).width() && left <= 0
-      if (isHeightValid) {
-        const heightStyle = {
-          'transform': 'none',
-          'top': `${top}px`
-        }
-        $(VIDEO_CLS).css(heightStyle)
-        $(SCREEN_CLS).css(heightStyle)
-      } 
-      if (isWidthValid) {
-        const widthStyle = { 
-          'transform': 'none',
-          'left': `${left}px`
-        }
-        $(VIDEO_CLS).css(widthStyle)
-        $(SCREEN_CLS).css(widthStyle)
+    mc.on('pan', this.handleDrag)
+  }
+  handleDrag(ev) {
+    if ( !isDragging ) {
+      isDragging = true;
+      lastPosX = $(VIDEO_CLS).offset().left;
+      lastPosY = $(VIDEO_CLS).offset().top ;
+    }
+    const posX = ev.deltaX + lastPosX;
+    const posY = ev.deltaY + lastPosY;
+    const lastHeight = window.innerHeight - posY
+    const isHeightValid = lastHeight <= $(VIDEO_CLS).height() && posY <= 0
+    const lastWidth = window.innerWidth - posX
+    const isWidthValid = lastWidth <= $(VIDEO_CLS).width() && posX <= 0
+    if (isHeightValid) {
+      const heightStyle = {
+        'transform': 'none',
+        'top': `${posY}px`
       }
-    });
+      $(VIDEO_CLS).css(heightStyle)
+      $(SCREEN_CLS).css(heightStyle)
+    } 
+    if (isWidthValid) {
+      const widthStyle = { 
+        'transform': 'none',
+        'left': `${posX}px`
+      }
+      $(VIDEO_CLS).css(widthStyle)
+      $(SCREEN_CLS).css(widthStyle)
+    }
+    if (ev.isFinal) {
+      isDragging = false;
+    }
   }
 }
