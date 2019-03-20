@@ -18,7 +18,6 @@ export function sleep(ms) {
 export function getRelativePosition(originalRes, currentRes, event) {
   const x = originalRes.x/currentRes.x * event.offsetX
   const y = originalRes.y/currentRes.y * event.offsetY
-  console.log(x, y)
   return { x: x, y: y }
 }
 
