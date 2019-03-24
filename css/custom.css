@@ -11,6 +11,7 @@ body {
   text-shadow: 2px 2px #FF9800; }
 
 .searchlight {
+  display: none;
   position: absolute;
   z-index: 1;
   height: 300px;
@@ -55,6 +56,9 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); }
+
+.video {
+  display: none; }
 
 .searchscreen {
   z-index: 3; }

@@ -16,25 +16,35 @@ export default class main {
     this.greetings = greetings
     this.coordinate = coordinate
   }
-  run() {
-    this.initGreetings()
-    this.initEvents()
-    this.initGestureEventListener()
-  }
   initGreetings() {
     const manager = new dialogueManager(this.greetings)
     manager.start()
   }
-  initEvents() {
+  run() {
     if ($(VIDEO_CLS)[0].readyState === 4 ) {
+      this.loadSpotlight()
       this.updateScreenSize()
-      this.initSearchEvents()
     } else {
-      $(VIDEO_CLS).on('loadeddata', (e) => {
+      $(VIDEO_CLS).on('loadeddata', () => {
+        this.loadSpotlight()
         this.updateScreenSize()
-        this.initSearchEvents()
       })
     }
+  }
+  loadSpotlight() {
+    const initialCenterWidth = $('.text-autoplay')[0].offsetLeft
+    const initialCenterHeight = $('.text-autoplay')[0].offsetTop
+    const diff = $(SPOTLIGHT_CLS).width()/2
+    $(SPOTLIGHT_CLS).css({ 
+      marginLeft: initialCenterWidth - diff,
+      marginTop: initialCenterHeight - diff})
+    $(SPOTLIGHT_CLS).fadeIn()
+    setTimeout(() => {
+      $(VIDEO_CLS).fadeIn()
+      this.initGreetings()
+      this.initGestureEventListener()
+      this.initSearchEvents()
+    }, 500)
   }
   updateScreenSize() {
     $(SCREEN_CLS).height($(VIDEO_CLS).height())
