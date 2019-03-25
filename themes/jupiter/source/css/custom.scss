@@ -21,6 +21,7 @@ body {
 }
 
 .searchlight {
+  display: none;
   position: absolute;
   z-index: 1;
   height: 300px;
@@ -44,7 +45,6 @@ body {
   background-repeat: no-repeat;
 }
 
-
 .video-container {
   z-index: -1;
   position: absolute;
@@ -63,6 +63,10 @@ body {
     left: 50%;
     transform: translate(-50%,-50%);
   }
+}
+
+.video {
+  display: none;
 }
 
 .searchscreen {
@@ -102,7 +106,7 @@ body {
   margin: 20px 30px;
   text-decoration: none;
   a {
-        text-decoration: none;
+    text-decoration: none;
     color: white;
   }
   a:hover {

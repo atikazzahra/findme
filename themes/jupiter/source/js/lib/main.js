@@ -8,31 +8,43 @@ const SCREEN_CLS = '.searchscreen'
 const TITLE_CLS = '.title'
 const SUBTITLE_CLS = '.subtitle'
 const NAV_CLS = '.navigation'
-
+let lastPosX = 0;
+let lastPosY = 0;
+let isDragging = false;
 export default class main {
   constructor(greetings, coordinate) {
     this.greetings = greetings
     this.coordinate = coordinate
   }
-  run() {
-    this.initGreetings()
-    this.initEvents()
-    this.initGestureEventListener()
-  }
   initGreetings() {
     const manager = new dialogueManager(this.greetings)
     manager.start()
   }
-  initEvents() {
+  run() {
     if ($(VIDEO_CLS)[0].readyState === 4 ) {
+      this.loadSpotlight()
       this.updateScreenSize()
-      this.initSearchEvents()
     } else {
-      $(VIDEO_CLS).on('loadeddata', (e) => {
+      $(VIDEO_CLS).on('loadeddata', () => {
+        this.loadSpotlight()
         this.updateScreenSize()
-        this.initSearchEvents()
       })
     }
+  }
+  loadSpotlight() {
+    const initialCenterWidth = $('.text-autoplay')[0].offsetLeft
+    const initialCenterHeight = $('.text-autoplay')[0].offsetTop
+    const diff = $(SPOTLIGHT_CLS).width()/2
+    $(SPOTLIGHT_CLS).css({ 
+      marginLeft: initialCenterWidth - diff,
+      marginTop: initialCenterHeight - diff})
+    $(SPOTLIGHT_CLS).fadeIn()
+    setTimeout(() => {
+      $(VIDEO_CLS).fadeIn()
+      this.initGreetings()
+      this.initGestureEventListener()
+      this.initSearchEvents()
+    }, 500)
   }
   updateScreenSize() {
     $(SCREEN_CLS).height($(VIDEO_CLS).height())
@@ -93,29 +105,33 @@ export default class main {
     mc.get('pan').set({
       threshold: 0,
       direction: Hammer.DIRECTION_ALL });
-    mc.on('pan', (ev) => {
-      const top = $(VIDEO_CLS).offset().top + ev.deltaY
-      const left = $(VIDEO_CLS).offset().left + ev.deltaX
-      const lastHeight = window.innerHeight - top
-      const isHeightValid = lastHeight <= $(VIDEO_CLS).height() && top <= 0
-      const lastWidth = window.innerWidth - left
-      const isWidthValid = lastWidth <= $(VIDEO_CLS).width() && left <= 0
-      if (isHeightValid) {
-        const heightStyle = {
-          'transform': 'none',
-          'top': `${top}px`
-        }
-        $(VIDEO_CLS).css(heightStyle)
-        $(SCREEN_CLS).css(heightStyle)
-      } 
-      if (isWidthValid) {
-        const widthStyle = { 
-          'transform': 'none',
-          'left': `${left}px`
-        }
-        $(VIDEO_CLS).css(widthStyle)
-        $(SCREEN_CLS).css(widthStyle)
-      }
-    });
+    mc.on('pan', this.handleDrag)
+  }
+  handleDrag(ev) {
+    if ( !isDragging ) {
+      isDragging = true;
+      lastPosX = $(VIDEO_CLS).offset().left;
+      lastPosY = $(VIDEO_CLS).offset().top ;
+    }
+    let posX = ev.deltaX + lastPosX;
+    let posY = ev.deltaY + lastPosY;
+    const lastHeight = window.innerHeight - posY
+    const lastWidth = window.innerWidth - posX
+    const isHeightValid = lastHeight <= $(VIDEO_CLS).height()
+    const isWidthValid = lastWidth <= $(VIDEO_CLS).width()
+    posY = posY > 0 ? 0 : posY
+    posX = posX > 0 ? 0 : posX
+    const diffX = $(window).width() - $(VIDEO_CLS).width()
+    const diffY = $(window).height() - $(VIDEO_CLS).height()
+    const style = { 
+      'transform': 'none',
+      'top': `${isHeightValid ? posY : diffY}px`,
+      'left': `${isWidthValid ? posX : diffX}px`
+    }
+    $(VIDEO_CLS).css(style)
+    $(SCREEN_CLS).css(style)
+    if (ev.isFinal) {
+      isDragging = false;
+    }
   }
 }
