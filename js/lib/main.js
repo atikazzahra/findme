@@ -113,28 +113,23 @@ export default class main {
       lastPosX = $(VIDEO_CLS).offset().left;
       lastPosY = $(VIDEO_CLS).offset().top ;
     }
-    const posX = ev.deltaX + lastPosX;
-    const posY = ev.deltaY + lastPosY;
+    let posX = ev.deltaX + lastPosX;
+    let posY = ev.deltaY + lastPosY;
     const lastHeight = window.innerHeight - posY
-    const isHeightValid = lastHeight <= $(VIDEO_CLS).height() && posY <= 0
     const lastWidth = window.innerWidth - posX
-    const isWidthValid = lastWidth <= $(VIDEO_CLS).width() && posX <= 0
-    if (isHeightValid) {
-      const heightStyle = {
-        'transform': 'none',
-        'top': `${posY}px`
-      }
-      $(VIDEO_CLS).css(heightStyle)
-      $(SCREEN_CLS).css(heightStyle)
-    } 
-    if (isWidthValid) {
-      const widthStyle = { 
-        'transform': 'none',
-        'left': `${posX}px`
-      }
-      $(VIDEO_CLS).css(widthStyle)
-      $(SCREEN_CLS).css(widthStyle)
+    const isHeightValid = lastHeight <= $(VIDEO_CLS).height()
+    const isWidthValid = lastWidth <= $(VIDEO_CLS).width()
+    posY = posY > 0 ? 0 : posY
+    posX = posX > 0 ? 0 : posX
+    const diffX = $(window).width() - $(VIDEO_CLS).width()
+    const diffY = $(window).height() - $(VIDEO_CLS).height()
+    const style = { 
+      'transform': 'none',
+      'top': `${isHeightValid ? posY : diffY}px`,
+      'left': `${isWidthValid ? posX : diffX}px`
     }
+    $(VIDEO_CLS).css(style)
+    $(SCREEN_CLS).css(style)
     if (ev.isFinal) {
       isDragging = false;
     }
